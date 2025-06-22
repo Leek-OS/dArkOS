@@ -112,6 +112,7 @@ function remove_arkbuild() {
   done
   sudo rm -rf Arkbuild/home/ark/Arkbuild_ccache
   [ -d "Arkbuild" ] && sudo umount -l Arkbuild
+  [ -d "Arkbuild-final" ] && sudo umount -l Arkbuild-final
   return 0
 }
 

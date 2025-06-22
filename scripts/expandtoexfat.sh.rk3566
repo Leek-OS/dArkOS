@@ -2,7 +2,9 @@
 if mountpoint -q /roms; then
   sudo umount /roms
 fi
-sudo ln -s /dev/mmcblk1p5 /dev/hda3
+primary_block_partition=$(df -T | grep mmcblk[0-1]p4 | cut -d '/' -f 3 | cut -d ' ' -f 1)
+primary_block=${primary_block_partition:0:7}
+sudo ln -s /dev/${primary_block}p5 /dev/hda3
 sudo chmod 666 /dev/tty1
 export TERM=linux
 height="15"
@@ -28,7 +30,7 @@ fi
 #fi
 
 
-maxSize=$(lsblk -b --output SIZE -n -d /dev/mmcblk1)
+maxSize=$(lsblk -b --output SIZE -n -d /dev/${primary_block})
 
 newExtSizePct=$(printf %.2f "$((10**4 * 11000000000/$maxSize))e-4")
 newExtSizePct=$(echo print 1-$newExtSizePct | perl)
@@ -36,12 +38,22 @@ ExfatPctToRemain=$(echo print 100*$newExtSizePct | perl)
 
 #echo "$ExfatPctToRemain" > /home/ark/growpercentage.log
 
-# Expand the ext4 partition if possible to make room for future update needs
+# Expand the rootfs partition if possible to make room for future update needs
+partition_type=$(df -T | grep mmcblk[0-1]p4 | cut -d ' ' -f 2)
 if [ $ExfatPctToRemain -lt "100" ]; then
-  printf "d\n5\nw\n" | sudo fdisk /dev/mmcblk1
-  sudo growpart --free-percent=$ExfatPctToRemain -v /dev/mmcblk1 4
-  sudo resize2fs /dev/mmcblk1p4
-  printf "n\n5\n\n\nt\n5\n11\nw\n" | sudo fdisk /dev/mmcblk1
+  printf "d\n5\nw\n" | sudo fdisk /dev/${primary_block}
+  sudo growpart --free-percent=$ExfatPctToRemain -v /dev/${primary_block} 4
+  if [[ "$partition_type" == *"ext"* ]]; then
+    sudo resize2fs /dev/${primary_block}p4
+  elif [[ "$partition_type" == *"xfs"* ]]; then
+    sudo xfs_growfs /dev/${primary_block}p4
+  elif [[ "$partition_type" == *"btrfs"* ]]; then
+    sudo btrfs filesystem resize max /
+  else
+    echo "Don't know how to grow a $partition_type file system."
+	echo ""
+  fi
+  printf "n\n5\n\n\nt\n5\n11\nw\n" | sudo fdisk /dev/${primary_block}
 fi
 
 sudo mkfs.exfat -c 16K -L EASYROMS /dev/hda3
@@ -51,7 +63,7 @@ sleep 2
 sudo fsck.exfat -a /dev/hda3
 sync
 sleep 2
-sudo mount -t exfat -w /dev/mmcblk1p5 /roms
+sudo mount -t exfat -w /dev/${primary_block}p5 /roms
 sleep 2
 sudo tar -xvf /roms.tar -C /
 sync

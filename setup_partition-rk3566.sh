@@ -1,7 +1,12 @@
 #!/bin/bash
 #set -e
 
-ROOT_FILESYSTEM_FORMAT="xfs"
+ROOT_FILESYSTEM_FORMAT="btrfs"
+if [ "$ROOT_FILESYSTEM_FORMAT" == "xfs" ] || [ "$ROOT_FILESYSTEM_FORMAT" == "btrfs" ]; then
+  ROOT_FILESYSTEM_FORMAT_PARAMETERS="-f -L ROOTFS"
+elif [[ "$ROOT_FILESYSTEM_FORMAT" == *"ext"* ]]; then
+  ROOT_FILESYSTEM_FORMAT_PARAMETERS="-F -L ROOTFS"
+fi
 DISK="ArkOS_RG353M.img"
 IMAGE_SIZE=7.5G
 SECTOR_SIZE=512
@@ -42,7 +47,7 @@ sleep 2
 
 # Format partitions where needed
 sudo mkfs.vfat -n ANBERNIC "${LOOP_DEV}p3"
-sudo mkfs.${ROOT_FILESYSTEM_FORMAT} -L rootfs "${LOOP_DEV}p4"
+sudo mkfs.${ROOT_FILESYSTEM_FORMAT} ${ROOT_FILESYSTEM_FORMAT_PARAMETERS} "${LOOP_DEV}p4"
 sudo mkfs.vfat -n ROMS "${LOOP_DEV}p5"
 
 # Copy content (example only)
@@ -63,7 +68,7 @@ sudo mkfs.vfat -n ROMS "${LOOP_DEV}p5"
 #sudo dd if=device/rk3566/resource.img of=$LOOP_DEV bs=$SECTOR_SIZE seek=24576 conv=notrunc
 
 dd if=/dev/zero of="${FILESYSTEM}" bs=1M count=0 seek="${BUILD_SIZE}" conv=fsync
-sudo mkfs.${ROOT_FILESYSTEM_FORMAT} -F -L ROOTFS "${FILESYSTEM}"
+sudo mkfs.${ROOT_FILESYSTEM_FORMAT} ${ROOT_FILESYSTEM_FORMAT_PARAMETERS} "${FILESYSTEM}"
 mkdir -p Arkbuild/
 sudo mount -t ${ROOT_FILESYSTEM_FORMAT} -o loop ${FILESYSTEM} Arkbuild/
 

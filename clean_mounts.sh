@@ -7,3 +7,4 @@ sudo umount $PWD/Arkbuild_ccache
 rm -rf mnt
 sudo rm -f "${FILESYSTEM}"
 sudo rm -rf $KERNEL_SRC
+sudo losetup -d ${LOOP_DEV}

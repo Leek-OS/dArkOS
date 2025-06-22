@@ -1,5 +1,6 @@
 alsa-utils
 brightnessctl
+btrfs-progs
 ccache
 cloud-guest-utils
 cmake

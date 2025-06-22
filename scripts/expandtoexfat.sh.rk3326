@@ -30,11 +30,21 @@ ExfatPctToRemain=$(echo print 100*$newExtSizePct | perl)
 
 #echo "$ExfatPctToRemain" > /home/ark/growpercentage.log
 
-# Expand the ext4 partition if possible to make room for future update needs
+# Expand the rootfs partition if possible to make room for future update needs
+partition_type=$(df -T | grep mmcblk[0-1]p2 | cut -d ' ' -f 2)
 if [ $ExfatPctToRemain -lt "100" ]; then
   printf "d\n3\nw\n" | sudo fdisk /dev/mmcblk0
   sudo growpart --free-percent=$ExfatPctToRemain -v /dev/mmcblk0 2
-  sudo resize2fs /dev/mmcblk0p2
+  if [[ "$partition_type" == *"ext"* ]]; then
+    sudo resize2fs /dev/mmcblk0p2
+  elif [[ "$partition_type" == *"xfs"* ]]; then
+    sudo xfs_growfs /dev/mmcblk0p2
+  elif [[ "$partition_type" == *"btrfs"* ]]; then
+    sudo btrfs filesystem resize max /
+  else
+    echo "Don't know how to grow a $partition_type file system."
+	echo ""
+  fi
   ext4endSector=$(sudo sfdisk -l /dev/mmcblk0 | grep mmcblk0p2 | awk '{print $3}')
   exfatstartSector=$(echo print 1+$ext4endSector | perl)
   printf "n\np\n3\n$exfatstartSector\n\nt\n3\n11\nw\n" | sudo fdisk /dev/mmcblk0

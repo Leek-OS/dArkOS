@@ -45,15 +45,14 @@ source ./build_ogage.sh
 source ./build_ogacontrols.sh
 source ./build_351files.sh
 source ./build_filebrowser.sh
-#source ./build_wpasupplicant.sh
 source ./build_gptokeyb.sh
 source ./build_drmtool.sh
 source ./build_emulationstation-rk3566.sh
 source ./finishing_touches-rk3566.sh
 source ./cleanup_filesystem.sh
 source ./write_rootfs-rk3566.sh
-source ./clean_mounts.sh
-source ./create_image.sh
+#source ./clean_mounts.sh
+#source ./create_image.sh
 ) 2>&1 | tee -a build.log
 # You can insert additional build steps here (e.g., bootloader, splash setup)
 
