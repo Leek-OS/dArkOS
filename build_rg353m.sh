@@ -51,8 +51,8 @@ source ./build_emulationstation-rk3566.sh
 source ./finishing_touches-rk3566.sh
 source ./cleanup_filesystem.sh
 source ./write_rootfs-rk3566.sh
-#source ./clean_mounts.sh
-#source ./create_image.sh
+source ./clean_mounts.sh
+source ./create_image.sh
 ) 2>&1 | tee -a build.log
 # You can insert additional build steps here (e.g., bootloader, splash setup)
 

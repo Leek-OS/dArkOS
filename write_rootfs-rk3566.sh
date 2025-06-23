@@ -15,12 +15,12 @@ elif [[ "${ROOT_FILESYSTEM_FORMAT}" == *"ext"* ]]; then
 elif [ "${ROOT_FILESYSTEM_FORMAT}" == "btrfs" ]; then
   FILESYSTEM_LOOP=$(cat /proc/mounts | grep "Arkbuild btrfs" | cut -d ' ' -f 1)
   sudo btrfs check --force --repair ${FILESYSTEM_LOOP}
-  sudo btrfs balance start Arkbuild
+  sudo btrfs balance start --full-balance Arkbuild
   #BTRFS_MIN_SIZE=$(sudo btrfs filesystem usage -b Arkbuild/ | grep -A 1 Unallocated | awk '!/Unallocated/')
   #BTRFS_MIN_SIZE=$(echo $BTRFS_MIN_SIZE | cut -d ' ' -f 2)
   #BTRFS_MIN_SIZE=$(echo "$BTRFS_MIN_SIZE * 0.9" | bc | cut -d '.' -f 1)
-  sudo btrfs filesystem resize 7000M Arkbuild/
-  sudo truncate -s 7G ${FILESYSTEM}
+  sudo btrfs filesystem resize 7300M Arkbuild/
+  sudo truncate -s 7300MB ${FILESYSTEM}
   sudo btrfs check --force --repair ${FILESYSTEM_LOOP}
   sudo dd if="${FILESYSTEM}" of="${LOOP_DEV}p4" bs=512 conv=fsync,notrunc
 fi

@@ -3,7 +3,7 @@
 echo -e "Boostraping Debian....\n\n"
 # Ensure some build tools are installed and ready
 sudo apt -y update
-for NEEDED_TOOL in bc build-essential bison flex ccache debootstrap eatmydata gcc lib32stdc++6 libc6-i386 libncurses5-dev libssl-dev lz4 lzop python-is-python3 qemu-user-static zlib1g:i386
+for NEEDED_TOOL in bc btrfs-progs build-essential bison flex ccache debootstrap eatmydata gcc lib32stdc++6 libc6-i386 libncurses5-dev libssl-dev lz4 lzop python-is-python3 qemu-user-static zlib1g:i386 xfsprogs
 do
   dpkg -s "$NEEDED_TOOL" &>/dev/null
   if [[ $? != "0" ]]; then
@@ -65,7 +65,7 @@ sudo chroot Arkbuild/ eatmydata apt-get install -y libdrm-dev libgbm1
 setup_ark_user
 sleep 10
 echo -e "Generating /etc/fstab"
-echo -e "/dev/mmcblk1p4 / ${ROOT_FILESYSTEM_FORMAT} defaults, noatime 0 1
+echo -e "/dev/mmcblk1p4 / ${ROOT_FILESYSTEM_FORMAT} defaults,noatime 0 0
 /dev/mmcblk1p3 /boot vfat defaults,noatime 0 2" | sudo tee Arkbuild/etc/fstab
 echo -e "Generating 10-standard.rules for udev"
 echo -e "# Rules

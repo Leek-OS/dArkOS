@@ -68,7 +68,7 @@ sudo chroot Arkbuild/ bash -c "systemctl enable firstboot"
 
 #Generate fstab to be used after EASYROMS expansion
 cat <<EOF | sudo tee ${mountpoint}/fstab.exfat
-/dev/mmcblk1p4  /  ${ROOT_FILESYSTEM_FORMAT}  defaults,noatime  0 1
+/dev/mmcblk1p4  /  ${ROOT_FILESYSTEM_FORMAT}  defaults,noatime  0 0
 
 /dev/mmcblk1p3 /boot vfat defaults,noatime 0 0
 /dev/mmcblk1p5 /roms exfat defaults,auto,umask=000,uid=1002,gid=1002,noatime 0 0
