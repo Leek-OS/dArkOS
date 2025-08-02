@@ -3,6 +3,9 @@
 # Set build date
 BUILD_DATE=$(date "+%m%d%Y")
 
+# Set http/https buffer to over 500MB to minimize on possible git clone infinite hangs
+git config --global http.postBuffer 524288000
+
 # Verify the correct toolchain is available
 if [ ! -d "/opt/toolchains/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu" ]; then
   sudo mkdir -p /opt/toolchains
