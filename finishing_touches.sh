@@ -241,7 +241,7 @@ sudo losetup -d ${LOOP_BOOT}
 # Format rootfs partition in final image
 ROOTFS_PART_OFFSET=$((STORAGE_PART_START * 512))
 LOOP_ROOTFS=$(sudo losetup --find --show --offset ${ROOTFS_PART_OFFSET} ${DISK})
-sudo mkfs.${ROOT_FILESYSTEM_FORMAT} -F -L ROOTFS ${LOOP_ROOTFS}
+sudo mkfs.${ROOT_FILESYSTEM_FORMAT} ${ROOT_FILESYSTEM_FORMAT_PARAMETERS} ${LOOP_ROOTFS}
 sudo losetup -d ${LOOP_ROOTFS}
 
 # Format ROMS partition in final image
