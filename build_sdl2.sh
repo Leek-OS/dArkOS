@@ -18,7 +18,7 @@ fi
 
 # Build and install SDL2
 if [ "$ARCH" == "arm-linux-gnueabihf" ]; then
-  sudo chroot ${CHROOT_DIR}/ bash -c "cd /home/ark &&
+  sudo chroot ${CHROOT_DIR}/ bash -c "source /root/.bashrc && cd /home/ark &&
     if [ ! -d ${CHIPSET}_core_builds ]; then git clone https://github.com/christianhaitian/${CHIPSET}_core_builds.git; fi &&
     cd ${CHIPSET}_core_builds &&
     chmod 777 builds-alt.sh &&
@@ -27,7 +27,7 @@ if [ "$ARCH" == "arm-linux-gnueabihf" ]; then
     make install
     "
 else
-  sudo chroot ${CHROOT_DIR}/ bash -c "cd /home/ark &&
+  sudo chroot ${CHROOT_DIR}/ bash -c "source /root/.bashrc && cd /home/ark &&
     if [ ! -d ${CHIPSET}_core_builds ]; then git clone https://github.com/christianhaitian/${CHIPSET}_core_builds.git; fi &&
     cd ${CHIPSET}_core_builds &&
     chmod 777 builds-alt.sh &&

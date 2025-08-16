@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Build and install SCUMMVM standalone emulator
-call_chroot "source /root/.bashrc && cd /home/ark &&
+call_chroot "cd /home/ark &&
   cd ${CHIPSET}_core_builds &&
   chmod 777 builds-alt.sh &&
   eatmydata ./builds-alt.sh scummvm
