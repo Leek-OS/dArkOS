@@ -2499,15 +2499,6 @@
 		<theme>vhs</theme>
 	</system>
 	<system>
-		<name>options</name>
-		<fullname>Options</fullname>
-		<path>/opt/system/</path>
-		<extension>.sh .SH</extension>
-        <command>sudo chmod 666 /dev/tty1; %ROM% 2>&1 > /dev/tty1; printf "\033c" >> /dev/tty1</command>
-		<platform>ignore</platform>
-		<theme>retropie</theme>
-	</system>
-	<system>
 		<name>retroarch</name>
 		<fullname>Retroarch</fullname>
 		<path>/opt/cmds/</path>

@@ -370,7 +370,7 @@ sudo cp -a hypseus-singe/scripts/Scan* ${fat32_mountpoint}/scummvm/
 sudo cp -a scummvm/scripts/menu.scummvm ${fat32_mountpoint}/scummvm/
 
 # Clone some themes to the roms/themes folder
-sudo git clone https://github.com/Jetup13/es-theme-nes-box.git ${fat32_mountpoint}/themes/es-theme-nes-box
+sudo git clone --depth=1 https://github.com/Jetup13/es-theme-nes-box.git ${fat32_mountpoint}/themes/es-theme-nes-box
 sync
 
 # Create roms.tar for use after exfat partition creation
