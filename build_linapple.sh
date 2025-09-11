@@ -15,8 +15,8 @@ sudo cp -a Arkbuild/home/ark/${CHIPSET}_core_builds/linapplesa-64/linapple Arkbu
 sudo cp -a Arkbuild/home/ark/${CHIPSET}_core_builds/linapple/res/Master.dsk Arkbuild/opt/linapple/
 sudo cp -a Arkbuild/home/ark/${CHIPSET}_core_builds/linapple/res/A2_BASIC.SYM Arkbuild/opt/linapple/
 sudo cp -a Arkbuild/home/ark/${CHIPSET}_core_builds/linapple/res/APPLE2E.SYM Arkbuild/opt/linapple/
-sudo cp -a linapple/gamecontrollerdb.txt Arkbuild/opt/linapple/
-sudo cp -R -a linapple/configs/* Arkbuild/opt/linapple/
+sudo cp linapple/gamecontrollerdb.txt Arkbuild/opt/linapple/
+sudo cp -R linapple/configs/* Arkbuild/opt/linapple/
 sudo cp linapple/apple2.sh Arkbuild/usr/local/bin/
 call_chroot "chown -R ark:ark /opt/"
 sudo chmod 777 Arkbuild/opt/linapple/linapple

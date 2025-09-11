@@ -121,7 +121,7 @@ fi
 	sudo cp -f /boot/fstab.exfat /etc/fstab &> /dev/null
 	sync
 	sudo rm -f /boot/doneit* &> /dev/null
-	if [ ! -f "/boot/rk3326-rg351v-linux.dtb" ] && [ ! -f "/boot/rk3326-rg351mp-linux.dtb" ]; then
+	if [ ! -f "/boot/rk3326-rg351v-linux.dtb" ] && [ ! -f "/boot/rk3326-rg351mp-linux.dtb" ] && [ ! -f "/boot/rk3326-g350-linux.dtb" ]; then
 	  sudo rm -f /roms.tar &> /dev/null
 	fi
 	sudo rm -f /boot/fstab.exfat &> /dev/null

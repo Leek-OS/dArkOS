@@ -6,7 +6,7 @@ then
   source ../exports.sh
 fi
 echo "export devid=$(printenv DEV_ID)" | sudo tee Arkbuild/home/ark/ES_VARIABLES.txt
-echo  "export devpass=$(printenv DEV_PASS)" | sudo tee -a Arkbuild/home/ark/ES_VARIABLES.txt
+echo "export devpass=$(printenv DEV_PASS)" | sudo tee -a Arkbuild/home/ark/ES_VARIABLES.txt
 echo "export apikey=$(printenv TGDB_APIKEY)" | sudo tee -a Arkbuild/home/ark/ES_VARIABLES.txt
 echo "export softname=\"dArkOS-${UNIT}\"" | sudo tee -a Arkbuild/home/ark/ES_VARIABLES.txt
 

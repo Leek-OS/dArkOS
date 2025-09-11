@@ -21,8 +21,8 @@ call_chroot32 "cd /home/ark &&
   "
 sudo cp -a Arkbuild/home/ark/${CHIPSET}_core_builds/retrorun-64/retrorun${ext} Arkbuild/usr/local/bin/retrorun
 sudo cp -a Arkbuild32/home/ark/${CHIPSET}_core_builds/retrorun-32/retrorun32${ext} Arkbuild/usr/local/bin/retrorun32
-sudo cp -a retrorun/scripts/*.sh Arkbuild/usr/local/bin/
-sudo cp -a retrorun/configs/retrorun.cfg.${CHIPSET} Arkbuild/home/ark/.config/retrorun.cfg
+sudo cp retrorun/scripts/*.sh Arkbuild/usr/local/bin/
+sudo cp retrorun/configs/retrorun.cfg.${CHIPSET} Arkbuild/home/ark/.config/retrorun.cfg
 
 sudo chmod 777 Arkbuild/usr/local/bin/retrorun*
 sudo chmod 777 Arkbuild/usr/local/bin/atomiswave.sh

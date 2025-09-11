@@ -15,7 +15,7 @@ sudo cp -a Arkbuild/usr/lib/aarch64-linux-gnu/libwebpdemux.so.*[2-9] Arkbuild/op
 sudo cp -a Arkbuild/home/ark/${CHIPSET}_core_builds/gzdoom64/*.pk3 Arkbuild/home/ark/.config/gzdoom/
 sudo cp -R Arkbuild/home/ark/${CHIPSET}_core_builds/gzdoom/fm_banks/ Arkbuild/home/ark/.config/gzdoom/
 sudo cp -R Arkbuild/home/ark/${CHIPSET}_core_builds/gzdoom/soundfont/ Arkbuild/home/ark/.config/gzdoom/
-sudo cp -a gzdoom/configs/${UNIT}/gzdoom.ini Arkbuild/home/ark/.config/gzdoom/
+sudo cp gzdoom/configs/${UNIT}/gzdoom.ini Arkbuild/home/ark/.config/gzdoom/
 sudo cp gzdoom/scripts/doom* Arkbuild/usr/local/bin/
 sudo cp -R gzdoom/backup/ Arkbuild/home/ark/.config/gzdoom/
 call_chroot "chown -R ark:ark /home/ark/.config/"

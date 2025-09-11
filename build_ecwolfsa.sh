@@ -9,7 +9,7 @@ call_chroot "cd /home/ark &&
 sudo mkdir -p Arkbuild/opt/ecwolf
 sudo mkdir -p Arkbuild/home/ark/.config/ecwolf
 sudo cp -a Arkbuild/home/ark/${CHIPSET}_core_builds/ecwolf-64/* Arkbuild/opt/ecwolf/
-sudo cp -a ecwolf/config/ecwolf.cfg.${UNIT} Arkbuild/home/ark/.config/ecwolf/ecwolf.cfg
+sudo cp ecwolf/config/ecwolf.cfg.${UNIT} Arkbuild/home/ark/.config/ecwolf/ecwolf.cfg
 sudo cp -a ecwolf/ecwolf* Arkbuild/usr/local/bin/
 
 call_chroot "chown -R ark:ark /home/ark/.config/"
