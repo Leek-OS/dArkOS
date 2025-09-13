@@ -16,11 +16,12 @@ fi
 if [[ "$UNIT" == *"353"* ]] || [[ "$UNIT" == *"503"* ]]; then
   DISK="dArkOS_RG${UNIT}_${DEBIAN_CODE_NAME}_${BUILD_DATE}.img"
 else
-  DISK="dArkOS_${UNIT}_${DEBIAN_CODE_NAME}_${BUILD_DATE}.img"
+  iName=`echo ${UNIT} | tr '[:lower:]' '[:upper:]'`
+  DISK="dArkOS_${iName}_${DEBIAN_CODE_NAME}_${BUILD_DATE}.img"
 fi
 IMAGE_SIZE=7.5G
 SECTOR_SIZE=512
-BUILD_SIZE=65000     # Initial file system size in MB during the build.  Then will be reduced to the DISK_SIZE or below upon completion
+BUILD_SIZE=50000     # Initial file system size in MB during the build.  Then will be reduced to the DISK_SIZE or below upon completion
 FILESYSTEM="ArkOS_File_System.img"
 
 # Create blank image
