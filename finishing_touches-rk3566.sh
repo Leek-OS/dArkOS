@@ -60,16 +60,6 @@ sudo chroot Arkbuild/ bash -c "(crontab -l 2>/dev/null; echo \"@reboot /usr/loca
 # Find and record panel id on boot
 sudo chroot Arkbuild/ bash -c "(crontab -l 2>/dev/null; echo \"@reboot dmesg | grep 'panel id' > /home/ark/.config/.panel_info &\") | crontab -"
 
-# Speaker Toggle to set audio output to SPK on boot
-sudo mkdir -p Arkbuild/usr/local/bin
-sudo cp scripts/spktoggle.sh Arkbuild/usr/local/bin/
-sudo chmod 777 Arkbuild/usr/local/bin/spktoggle.sh
-sudo chroot Arkbuild/ bash -c "(crontab -l 2>/dev/null; echo \"@reboot /usr/local/bin/spktoggle.sh &\") | crontab -"
-#sudo cp scripts/audiopath.service Arkbuild/etc/systemd/system/audiopath.service
-sudo cp scripts/audiostate.service Arkbuild/etc/systemd/system/audiostate.service
-#sudo chroot Arkbuild/ bash -c "systemctl enable audiopath"
-sudo chroot Arkbuild/ bash -c "systemctl enable audiostate"
-
 # Copy necessary tools for expansion of ROOTFS and convert fat32 games partition to exfat on initial boot
 sudo cp scripts/expandtoexfat.sh.${CHIPSET} ${mountpoint}/expandtoexfat.sh
 sudo cp scripts/firstboot.sh ${mountpoint}/firstboot.sh
@@ -161,6 +151,16 @@ if [[ "$UNIT" == "rgb30" ]]; then
   sudo chroot Arkbuild/ bash -c "(crontab -l 2>/dev/null; echo \"@reboot /usr/local/bin/rgb30versioncheck.sh &\") | crontab -"
   sudo chroot Arkbuild/ bash -c "systemctl enable batt_led"
 fi
+
+# Speaker Toggle to set audio output to SPK on boot
+sudo mkdir -p Arkbuild/usr/local/bin
+sudo cp scripts/spktoggle.sh Arkbuild/usr/local/bin/
+sudo chmod 777 Arkbuild/usr/local/bin/spktoggle.sh
+sudo chroot Arkbuild/ bash -c "(crontab -l 2>/dev/null; echo \"@reboot /usr/local/bin/spktoggle.sh &\") | crontab -"
+#sudo cp scripts/audiopath.service Arkbuild/etc/systemd/system/audiopath.service
+sudo cp scripts/audiostate.service Arkbuild/etc/systemd/system/audiostate.service
+#sudo chroot Arkbuild/ bash -c "systemctl enable audiopath"
+sudo chroot Arkbuild/ bash -c "systemctl enable audiostate"
 
 # Copy various other backend tools
 sudo cp -R scripts/.asoundbackup/ Arkbuild/usr/local/bin/

@@ -10,16 +10,16 @@ else
   sudo setfont /usr/share/consolefonts/Lat7-Terminus16.psf.gz
 fi
 
-if [ -f "/boot/rk3566.dtb" ] || [ -f "/boot/rk3566-OC.dtb" ]; then
-  if [ "$(cat ~/.config/.DEVICE)" == "RG353M" ]; then
+if compgen -G "/boot/rk3566*" > /dev/null; then
+  if [ "$(cat /home/ark/.config/.DEVICE)" == "RG353M" ]; then
     DEVICE="rg503"
-  elif [ "$(cat ~/.config/.DEVICE)" == "RG353V" ]; then
+  elif [ "$(cat /home/ark/.config/.DEVICE)" == "RG353V" ]; then
     DEVICE="rg353v"
-  elif [ "$(cat ~/.config/.DEVICE)" == "RK2023" ]; then
+  elif [ "$(cat /home/ark/.config/.DEVICE)" == "RK2023" ]; then
     DEVICE="rg503"
-  elif [ "$(cat ~/.config/.DEVICE)" == "RGB30" ]; then
+  elif [ "$(cat /home/ark/.config/.DEVICE)" == "RGB30" ]; then
     DEVICE="rg503"
-  elif [ "$(cat ~/.config/.DEVICE)" == "RG503" ]; then
+  elif [ "$(cat /home/ark/.config/.DEVICE)" == "RG503" ]; then
     DEVICE="rg503"
   else
     echo "This device is not compatible with this process."
@@ -66,7 +66,7 @@ do
       cp -f /usr/local/bin/.asoundbackup/.asoundrcbak.${DEVICE} /home/ark/.asoundrcbak
       cp -f /usr/local/bin/.asoundbackup/.asoundrcbak.${DEVICE} /home/ark/.asoundrc
       sudo chown ark:ark /home/ark/.asoundrc*
-      if [ "$(cat ~/.config/.DEVICE)" == "RGB30" ] || [ "$(cat ~/.config/.DEVICE)" == "RK2023" ] ; then
+      if [ "$(cat /home/ark/.config/.DEVICE)" == "RGB30" ] || [ "$(cat /home/ark/.config/.DEVICE)" == "RK2023" ] ; then
         amixer -q sset 'Playback Path' HP
       else
         amixer -q sset 'Playback Path' SPK

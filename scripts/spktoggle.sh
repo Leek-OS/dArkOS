@@ -8,6 +8,10 @@ spktoggle=$(amixer | grep "Item0: 'SPK'")
 if [ "$(cat /home/ark/.config/.DEVICE)" == "RGB30" ] || [ "$(cat /home/ark/.config/.DEVICE)" == "RK2023" ]; then
   presses="spktogglepress1 spktogglepress2 spktogglepress3 spktogglepress4 spktogglepress5"
 
+  if [[ ! -z $(amixer | grep "Item0: 'OFF'") ]]; then
+    amixer -q sset 'Playback Path' HP
+  fi
+
   if [ -z "$spktoggle" ]
   then
     for press in $presses
