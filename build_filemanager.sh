@@ -20,6 +20,8 @@ fi
 call_chroot "cd /home/ark &&
   git clone --recursive https://github.com/christianhaitian/rs97-commander-sdl2.git -b ${BRANCH} &&
   cd rs97-commander-sdl2 &&
+  if [[ ${UNIT} == \"rgb30\" ]]; then sed -i \"/SCREENW :/c\SCREENW :\= 720\" Makefile &&
+  sed -i \"/SCREENH :/c\SCREENH :\= 720\" Makefile; else echo \"\"; fi &&
   make -j$(nproc) &&
   strip DinguxCommander
   "
