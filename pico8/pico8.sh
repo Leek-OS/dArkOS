@@ -48,6 +48,20 @@ if [[ -f "/$directory/pico-8/pico8_64" ]]; then
   pico8executable=pico8_64
 elif [[ -f "/$directory/pico-8/pico8_dyn" ]]; then
   pico8executable=pico8_dyn
+elif [[ ! -z "$(find /$directory/pico-8/ -iname *raspi.zip)" ]]; then
+  printf "\n Found $(find /$directory/pico-8/ -iname *raspi.zip).  Extracting the necessary" >> /dev/tty1
+  printf "\n files.  Please wait..." >> /dev/tty1
+  sleep 3
+  unzip -jo "$(find /$directory/pico-8/ -iname *raspi.zip)" pico-8/pico8_64 pico-8/pico8.dat -d /$directory/pico-8/
+  if [[ "$?" == "0" ]]; then
+   printf "\n\nProcess completed successfully!" >> /dev/tty1
+   sleep 3
+   pico8executable=pico8_64
+  else
+   printf "\n\nProcess failed!  Please check the pico8 zip file and make sure it is not corrupted" >> /dev/tty1
+   printf "\nand is an authentic file from lexaloffle you purchased!" >> /dev/tty1
+   sleep 10
+  fi
 fi
 
 LaunchFake08() {

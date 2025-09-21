@@ -9,7 +9,7 @@ if [ "$ROOT_FILESYSTEM_FORMAT" == "xfs" ] || [ "$ROOT_FILESYSTEM_FORMAT" == "btr
     ROOT_FILESYSTEM_MOUNT_OPTIONS="defaults,noatime"
   else
     ROOT_FILESYSTEM_FORMAT_PARAMETERS="-O ^free-space-tree -f -L ROOTFS"
-    ROOT_FILESYSTEM_MOUNT_OPTIONS="defaults,noatime,compress=zlib:1,ssd_spread"
+    ROOT_FILESYSTEM_MOUNT_OPTIONS="defaults,noatime,compress=zlib:1"
   fi
 elif [[ "$ROOT_FILESYSTEM_FORMAT" == *"ext"* ]]; then
   ROOT_FILESYSTEM_FORMAT_PARAMETERS="-F -L ROOTFS"
@@ -18,7 +18,7 @@ fi
 SYSTEM_SIZE=100      # FAT32 boot partition size in MB
 STORAGE_SIZE=7500    # Root filesystem size in MB
 ROM_PART_SIZE=300    # FAT32 ROMS/shared partition size in MB
-BUILD_SIZE=50000     # Initial file system size in MB during the build.  Then will be reduced to the DISK_SIZE or below upon completion
+BUILD_SIZE=55000     # Initial file system size in MB during the build.  Then will be reduced to the DISK_SIZE or below upon completion
 
 SYSTEM_PART_START=32768
 SYSTEM_PART_END=$(( SYSTEM_PART_START + (SYSTEM_SIZE * 1024 * 1024 / 512) - 1 ))

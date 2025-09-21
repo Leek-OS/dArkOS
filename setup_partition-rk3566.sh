@@ -7,7 +7,7 @@ if [ "$ROOT_FILESYSTEM_FORMAT" == "xfs" ] || [ "$ROOT_FILESYSTEM_FORMAT" == "btr
   if [ "$ROOT_FILESYSTEM_FORMAT" != "btrfs" ]; then
     ROOT_FILESYSTEM_MOUNT_OPTIONS="defaults,noatime"
   else
-    ROOT_FILESYSTEM_MOUNT_OPTIONS="defaults,noatime,compress=zstd,ssd_spread"
+    ROOT_FILESYSTEM_MOUNT_OPTIONS="defaults,noatime,compress=zstd"
   fi
 elif [[ "$ROOT_FILESYSTEM_FORMAT" == *"ext"* ]]; then
   ROOT_FILESYSTEM_FORMAT_PARAMETERS="-F -L ROOTFS"
@@ -21,7 +21,7 @@ else
 fi
 IMAGE_SIZE=7.5G
 SECTOR_SIZE=512
-BUILD_SIZE=50000     # Initial file system size in MB during the build.  Then will be reduced to the DISK_SIZE or below upon completion
+BUILD_SIZE=55000     # Initial file system size in MB during the build.  Then will be reduced to the DISK_SIZE or below upon completion
 FILESYSTEM="ArkOS_File_System.img"
 
 # Create blank image
