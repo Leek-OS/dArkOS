@@ -19,7 +19,7 @@ else
 	if [ -f "Arkbuild_package_cache/${CHIPSET}/applewinsa.commit" ]; then
 	  sudo rm -f Arkbuild_package_cache/${CHIPSET}/applewinsa.commit
 	fi
-	sudo git --git-dir=Arkbuild/home/ark/${CHIPSET}_core_builds/Applewin/.git --work-tree=Arkbuild/home/ark/${CHIPSET}_core_builds/Applewin rev-parse HEAD > Arkbuild_package_cache/${CHIPSET}/applewinsa.commit
+	sudo git --git-dir=Arkbuild/home/ark/${CHIPSET}_core_builds/AppleWin/.git --work-tree=Arkbuild/home/ark/${CHIPSET}_core_builds/AppleWin rev-parse HEAD > Arkbuild_package_cache/${CHIPSET}/applewinsa.commit
 	sudo tar -czpf Arkbuild_package_cache/${CHIPSET}/applewinsa.tar.gz Arkbuild/opt/applewin/
 fi
 
