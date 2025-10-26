@@ -38,7 +38,7 @@ else
 	  sudo rm -f Arkbuild_package_cache/${CHIPSET}/emulationstation.commit
 	fi
 	sudo tar -czpf Arkbuild_package_cache/${CHIPSET}/emulationstation.tar.gz Arkbuild/usr/bin/emulationstation/ 
-	sudo git --git-dir=Arkbuild/home/ark/${CHIPSET}_core_builds/EmulationStation-fcamod/.git --work-tree=Arkbuild/home/ark/${CHIPSET}_core_builds/EmulationStation-fcamod rev-parse HEAD > Arkbuild_package_cache/${CHIPSET}/emulationstation.commit
+	sudo git --git-dir=Arkbuild/home/ark/EmulationStation-fcamod/.git --work-tree=Arkbuild/home/ark/EmulationStation-fcamod rev-parse HEAD > Arkbuild_package_cache/${CHIPSET}/emulationstation.commit
 fi
 sudo rm -rf Arkbuild/home/ark/EmulationStation-fcamod
 sudo mkdir -p Arkbuild/etc/emulationstation/themes

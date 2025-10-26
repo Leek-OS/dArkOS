@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Build and install lzdoom standalone emulator
-if [ -f "Arkbuild_package_cache/${CHIPSET}/emulationstation.tar.gz" ] && [ "$(cat Arkbuild_package_cache/${CHIPSET}/emulationstation.commit)" == "$(curl -s https:/api.github.com/repos/christianhaitian/lzdoom/commits/master | jq -r '.sha')" ]; then
-    sudo tar -xvzpf Arkbuild_package_cache/${CHIPSET}/emulationstation.tar.gz
+if [ -f "Arkbuild_package_cache/${CHIPSET}/lzdoom.tar.gz" ] && [ "$(cat Arkbuild_package_cache/${CHIPSET}/lzdoom.commit)" == "$(curl -s https:/api.github.com/repos/christianhaitian/lzdoom/commits/master | jq -r '.sha')" ]; then
+    sudo tar -xvzpf Arkbuild_package_cache/${CHIPSET}/lzdoom.tar.gz
 else
 	call_chroot "cd /home/ark &&
 	  cd ${CHIPSET}_core_builds &&
