@@ -2,7 +2,7 @@
 
 # Build Kodi package
 DEBIAN_CODE_NAME="trixie"
-KODI_VERSION_TAG="21.2-Omega"
+KODI_VERSION_TAG="21.3-Omega"
 KODI_DEVENV="Ark_devenv"
 
 if [ ! -d "${KODI_DEVENV}" ]; then
