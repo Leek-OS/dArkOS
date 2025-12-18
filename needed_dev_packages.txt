@@ -1,6 +1,8 @@
 autotools-dev
 build-essential
 ccache
+curl
+jq
 libasound2-dev
 libboost-date-time-dev
 libboost-dev
