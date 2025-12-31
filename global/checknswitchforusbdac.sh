@@ -4,10 +4,10 @@ DAC="0"
 DAC_EXIST=""
 NUM_CHECK='^[1-9]+$'
 
-if [ ! -f "/boot/rk3566.dtb" ] && [ ! -f "/boot/rk3566-OC.dtb" ]; then
+if [[ "$(tr -d '\0' < /proc/device-tree/compatible)" == *"rk3326"* ]]; then
   DEVICE="rk3326"
 else
-  if [ "$(cat ~/.config/.DEVICE)" == "RG353V" ]; then
+  if [ "$(cat /home/ark/.config/.DEVICE)" == "RG353V" ]; then
     DEVICE="rg353v"
   else
     DEVICE="rg503"
@@ -27,7 +27,7 @@ if [ ! -e "/home/ark/.asoundrc" ] || [ $(stat -c %s "/home/ark/.asoundrc") = "0"
   cp -f /home/ark/.asoundrcbak /home/ark/.asoundrc
   sudo chown ark:ark /home/ark/.asoundrc
   if [[ "$(tr -d '\0' < /proc/device-tree/compatible)" == *"rk3566"* ]]; then
-    if [ "$(cat ~/.config/.DEVICE)" == "RGB30" ] || [ "$(cat ~/.config/.DEVICE)" == "RK2023" ] ; then
+    if [ "$(cat /home/ark/.config/.DEVICE)" == "RGB30" ] || [ "$(cat /home/ark/.config/.DEVICE)" == "RK2023" ] ; then
       amixer -q sset 'Playback Path' HP
     else
       amixer -q sset 'Playback Path' SPK
